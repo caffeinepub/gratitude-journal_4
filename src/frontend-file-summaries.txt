@@ -1,0 +1,16 @@
+{
+  "frontend/src/App.tsx": "Main application component that initializes theme detection, handles authentication flow, profile setup, and renders the gratitude journal interface with entry form and entries list.",
+  "frontend/src/components/Layout.tsx": "Layout wrapper component providing consistent header with branding, theme toggle, and login button, main content area, and footer with attribution.",
+  "frontend/src/components/LoginButton.tsx": "Authentication button component that handles Internet Identity login/logout with visual feedback and proper cache clearing.",
+  "frontend/src/components/ProfileSetup.tsx": "Modal component for first-time user profile setup that collects the user's name and initializes theme preference to system default after initial authentication.",
+  "frontend/src/components/EntryForm.tsx": "Journal entry creation form with text area, voice-to-text microphone button, image upload integration, and submission handling.",
+  "frontend/src/components/ImageUpload.tsx": "Image upload component supporting multiple file selection with preview thumbnails, upload progress tracking, and removal functionality using ExternalBlob.",
+  "frontend/src/components/EntriesList.tsx": "List view component that fetches and displays all user journal entries in reverse chronological order with empty state messaging.",
+  "frontend/src/components/EntryCard.tsx": "Individual entry card component displaying entry text at full width (matching timestamp and button width), with images, inline editing capability, and an \"Add Photo\" button for uploading additional images to existing entries with confirmation dialogs for deletions.",
+  "frontend/src/hooks/useSpeechRecognition.ts": "Custom React hook wrapping the Web Speech API to provide voice-to-text transcription with start/stop controls and real-time transcript updates.",
+  "frontend/src/hooks/useQueries.ts": "React Query hooks for all backend operations including user profile management, theme preferences, journal entry CRUD operations, image management (add/remove), and proper cache invalidation.",
+  "frontend/src/index.css": "Global styles with warm, calming OKLCH color system featuring terracotta, sage, and peach tones for both light and dark modes.",
+  "frontend/tailwind.config.js": "Tailwind configuration extended with warm color palette tokens and custom design system matching the gratitude journal aesthetic.",
+  "frontend/src/hooks/useTheme.ts": "Custom React hook that manages theme state (system/light/dark), detects system preferences using matchMedia, integrates with backend user profile for persistence, and applies theme classes to document root with automatic system preference change detection.",
+  "frontend/src/components/ThemeToggle.tsx": "Theme toggle button component that cycles through system/light/dark modes with appropriate icons (Monitor/Sun/Moon) and tooltip labels, styled consistently with the app's design."
+}

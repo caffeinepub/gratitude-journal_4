@@ -1,0 +1,37 @@
+{
+  "kind": "coverage_report",
+  "version": "1.0",
+  "generatedAt": "2026-02-22T18:06:29.378Z",
+  "sources": {
+    "buildRequest": true,
+    "implementationPlan": true
+  },
+  "requirements": {
+    "total": 1,
+    "implemented": 1,
+    "items": [
+      {
+        "id": "REQ-17",
+        "summary": "Remove horizontal padding from the journal entry text content within entry cards so the text spans the full width of the card container, matching the width of the timestamp and action buttons above it",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/components/EntryCard.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/components/EntryCard.tsx"
+        ]
+      }
+    ]
+  },
+  "changedFiles": [
+    "build-request.json",
+    "feature_evidence.json",
+    "frontend-file-summaries.txt",
+    "frontend-implementation-plan.json",
+    "frontend/src/components/EntryCard.tsx",
+    "project_state.json",
+    "scratch/component-selection.json",
+    "spec.md",
+    "spec_vs_diff_report.json"
+  ]
+}

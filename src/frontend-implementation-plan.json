@@ -1,0 +1,24 @@
+{
+  "kind": "implementation_plan",
+  "version": "1.0",
+  "title": "Expand journal entry text to full width",
+  "requirements": [
+    {
+      "id": "REQ-17",
+      "summary": "Remove horizontal padding from journal entry text content so it spans the full width of the entry card, matching the width of the timestamp and action buttons",
+      "acceptanceCriteria": [
+        "Journal entry text content extends to the full width of the entry card",
+        "Text width matches the width of the date/time stamp and edit/delete buttons above it",
+        "No left or right padding constrains the entry text within the card",
+        "Images and 'Add Photo' button remain properly positioned below the text"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/EntryCard.tsx",
+          "operation": "modify",
+          "description": "Remove horizontal padding or margin from the text display element within the entry card so the journal entry text spans the full width of the card container. Ensure the text width aligns with the timestamp and action buttons (edit/delete) positioned above it. Verify that images and the 'Add Photo' button below the text remain properly positioned and unaffected by this change."
+        }
+      ]
+    }
+  ]
+}

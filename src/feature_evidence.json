@@ -1,0 +1,25 @@
+{
+  "kind": "feature_evidence_report",
+  "features": [
+    {
+      "featureId": "feature-remove-horizontal-padding-from-the-journal-entry-text-content-within-entry-cards-so-the-text-spans-the-full-width-of-the-card-container-matching-the-width-of-the-timestamp-and-action-buttons-above-it",
+      "featureTitle": "Remove horizontal padding from the journal entry text content within entry cards so the text spans the full width of the card container, matching the width of the timestamp and action buttons above it",
+      "files": [
+        "frontend/src/components/EntryCard.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "blob-storage@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-17"
+      ],
+      "confidence": "high"
+    }
+  ]
+}
