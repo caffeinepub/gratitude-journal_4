@@ -1,79 +1,52 @@
 {
   "kind": "build_request",
-  "title": "Add full-screen photo viewer with navigation and fix voice-to-text transcription bug",
+  "title": "Full-width entry text with repositioned edit/delete buttons",
   "priority": "normal",
   "requirements": [
     {
-      "id": "REQ-18",
-      "text": "Implement a full-screen photo viewer modal that opens when a user clicks on any photo thumbnail in a journal entry card, displaying the clicked photo at full size with a close button to exit the viewer",
+      "id": "REQ-1",
+      "text": "In EntryCard.tsx, make the journal entry text display full width by removing any width constraints that cause it to share horizontal space with the edit/delete action buttons.",
       "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-user-fullscreen-request"
+          "msg-latest"
         ],
         "quotes": [
-          "When i click on a photo for an entry can it be full screen?"
+          "Can we make the entry text full width? We may need to move the edit delete buttons"
         ]
       },
       "acceptanceCriteria": [
-        "Clicking any photo thumbnail in an entry card opens a full-screen modal overlay",
-        "The clicked photo displays at full size while maintaining aspect ratio",
-        "A close button is visible and functional to exit the full-screen view",
-        "Clicking outside the photo or pressing Escape key also closes the viewer"
+        "The entry text area spans the full width of the card container",
+        "No horizontal space is shared between the entry text and the action buttons"
       ]
     },
     {
-      "id": "REQ-19",
-      "text": "Add navigation arrows to the full-screen photo viewer that allow users to swipe between multiple photos when the journal entry contains more than one image, with the viewer starting at the clicked photo's position",
+      "id": "REQ-2",
+      "text": "In EntryCard.tsx, reposition the edit and delete buttons so they no longer sit inline beside the entry text. Place them in a dedicated row below the entry text (or as a compact toolbar at the bottom of the card) so they remain accessible without constraining text width.",
       "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-user-navigation-request"
+          "msg-latest"
         ],
         "quotes": [
-          "Navigation if entry has multiple images"
+          "We may need to move the edit delete buttons"
         ]
       },
       "acceptanceCriteria": [
-        "When an entry has multiple photos, left and right navigation arrows appear in the full-screen viewer",
-        "Clicking the right arrow advances to the next photo in the sequence",
-        "Clicking the left arrow goes back to the previous photo",
-        "The viewer opens showing the specific photo that was clicked",
-        "Navigation wraps around (last photo's next is first photo, first photo's previous is last photo)",
-        "Keyboard arrow keys also navigate between photos"
-      ]
-    },
-    {
-      "id": "REQ-20",
-      "text": "Fix the voice-to-text transcription bug in EntryForm component where transcribed text appears briefly in the textarea but then disappears, leaving a blank text area, ensuring the transcribed text persists in the textarea after speech recognition completes",
-      "target": "frontend",
-      "source": {
-        "messageIds": [
-          "msg-user-voice-bug"
-        ],
-        "quotes": [
-          "when I do voice to text.. i see the text show up temporarily but then it goes away and I'm left with a blank text area"
-        ]
-      },
-      "acceptanceCriteria": [
-        "When using voice-to-text transcription, the transcribed text remains visible in the textarea after speech recognition completes",
-        "The text does not disappear or reset to empty after appearing",
-        "This fix applies when creating new journal entries",
-        "This fix also applies when editing existing journal entries if the bug exists there",
-        "The transcribed text can be edited manually after transcription completes"
+        "Edit and delete buttons are visually separated from the entry text (below or in a footer row of the card)",
+        "Both buttons remain clearly visible and tappable",
+        "The layout looks correct in both light and dark themes"
       ]
     }
   ],
   "constraints": [
-    "Do not modify the backend schema or data models",
-    "Maintain the existing warm, calming visual theme in the photo viewer modal",
-    "The photo viewer must work with the existing image storage and retrieval system"
+    "Do not change backend logic or data models",
+    "Do not modify files under frontend/src/hooks/useInternetIdentity.ts, frontend/src/hooks/useActor.ts, frontend/src/main.tsx, or frontend/src/components/ui"
   ],
   "nonGoals": [
-    "Implementing zoom functionality for photos in the viewer",
-    "Adding photo editing capabilities within the full-screen viewer",
-    "Implementing swipe gestures on mobile devices (arrow buttons are sufficient)",
-    "Adding photo metadata display in the viewer"
+    "Redesigning the overall EntryCard visual style",
+    "Adding new entry actions or buttons",
+    "Changing inline edit form layout"
   ],
   "imageRequirements": {
     "required": [],

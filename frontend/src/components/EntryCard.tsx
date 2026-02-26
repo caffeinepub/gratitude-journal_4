@@ -32,7 +32,7 @@ export default function EntryCard({ entry }: EntryCardProps) {
   const [viewerOpen, setViewerOpen] = useState(false);
   const [currentPhotoIndex, setCurrentPhotoIndex] = useState(0);
   const fileInputRef = useRef<HTMLInputElement>(null);
-  
+
   const updateEntry = useUpdateEntry();
   const deleteEntry = useDeleteEntry();
   const addImages = useAddImagesToEntry();
@@ -47,7 +47,6 @@ export default function EntryCard({ entry }: EntryCardProps) {
   } = useSpeechRecognition();
 
   const handleSave = async () => {
-    // Stop listening if active
     if (isListening) {
       const finalTranscript = stopListening();
       if (finalTranscript) {
@@ -96,7 +95,7 @@ export default function EntryCard({ entry }: EntryCardProps) {
 
       const arrayBuffer = await file.arrayBuffer();
       const bytes = new Uint8Array(arrayBuffer);
-      
+
       const blob = ExternalBlob.fromBytes(bytes).withUploadProgress((percentage) => {
         setUploadProgress(percentage);
       });
@@ -108,7 +107,6 @@ export default function EntryCard({ entry }: EntryCardProps) {
       await addImages.mutateAsync({ id: entry.id, images: newImages });
     }
 
-    // Clear input and progress
     if (fileInputRef.current) {
       fileInputRef.current.value = '';
     }
@@ -126,8 +124,7 @@ export default function EntryCard({ entry }: EntryCardProps) {
     setViewerOpen(true);
   };
 
-  // Format timestamp
-  const date = new Date(Number(entry.timestamp) / 1000000); // Convert nanoseconds to milliseconds
+  const date = new Date(Number(entry.timestamp) / 1000000);
   const formattedDate = format(date, 'MMMM d, yyyy');
   const formattedTime = format(date, 'h:mm a');
 
@@ -137,111 +134,116 @@ export default function EntryCard({ entry }: EntryCardProps) {
   return (
     <>
       <Card className="hover:shadow-md transition-shadow">
-        <CardContent className="pt-6 px-0 space-y-4">
-          <div className="flex items-start justify-between gap-4 px-6">
-            <div className="flex-1 space-y-3">
-              <div className="text-sm text-muted-foreground">
-                <span className="font-medium">{formattedDate}</span>
-                <span className="mx-2">·</span>
-                <span>{formattedTime}</span>
-              </div>
+        <CardContent className="pt-6 px-6 space-y-3">
+          {/* Date/time row */}
+          <div className="text-sm text-muted-foreground">
+            <span className="font-medium">{formattedDate}</span>
+            <span className="mx-2">·</span>
+            <span>{formattedTime}</span>
+          </div>
 
-              {isEditing ? (
-                <div className="relative">
-                  <Textarea
-                    value={isListening ? `${editText} ${transcript}`.trim() : editText}
-                    onChange={(e) => setEditText(e.target.value)}
-                    className="min-h-[100px] pr-12"
-                    autoFocus
-                  />
-                  {isSupported && (
-                    <Button
-                      type="button"
-                      size="icon"
-                      variant={isListening ? 'default' : 'ghost'}
-                      className={`absolute right-2 top-2 ${
-                        isListening ? 'bg-warm-500 hover:bg-warm-600 text-white animate-pulse' : ''
-                      }`}
-                      onClick={handleMicClick}
-                      disabled={updateEntry.isPending}
-                    >
-                      {isListening ? (
-                        <MicOff className="w-4 h-4" />
-                      ) : (
-                        <Mic className="w-4 h-4" />
-                      )}
-                    </Button>
-                  )}
-                  {isListening && (
-                    <div className="text-sm text-warm-600 flex items-center gap-2 mt-2">
-                      <span className="w-2 h-2 bg-warm-500 rounded-full animate-pulse" />
-                      Listening...
-                    </div>
-                  )}
-                </div>
-              ) : (
-                <p className="text-foreground whitespace-pre-wrap leading-relaxed px-6 -mx-6">{entry.text}</p>
-              )}
-
-              {entry.images.length > 0 && (
-                <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 pt-2">
-                  {entry.images.map((image, index) => (
-                    <div key={index} className="relative group aspect-square rounded-lg overflow-hidden bg-muted">
-                      <img
-                        src={image.getDirectURL()}
-                        alt={`Entry image ${index + 1}`}
-                        className="w-full h-full object-cover cursor-pointer hover:opacity-90 transition-opacity"
-                        onClick={() => handlePhotoClick(index)}
-                      />
-                      <button
-                        type="button"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          setPhotoToDelete(image);
-                        }}
-                        disabled={isDeleting}
-                        className="absolute top-2 right-2 p-1.5 bg-destructive text-destructive-foreground rounded-full opacity-0 group-hover:opacity-100 transition-opacity hover:bg-destructive/90 disabled:opacity-50"
-                        aria-label="Delete photo"
-                      >
-                        <Trash2 className="w-3.5 h-3.5" />
-                      </button>
-                    </div>
-                  ))}
-                </div>
-              )}
-
-              <div className="flex gap-2 pt-2">
+          {/* Entry text — full width */}
+          {isEditing ? (
+            <div className="relative">
+              <Textarea
+                value={isListening ? `${editText} ${transcript}`.trim() : editText}
+                onChange={(e) => setEditText(e.target.value)}
+                className="min-h-[100px] pr-12 w-full"
+                autoFocus
+              />
+              {isSupported && (
                 <Button
                   type="button"
-                  variant="outline"
-                  size="sm"
-                  onClick={() => fileInputRef.current?.click()}
-                  disabled={isUploading}
+                  size="icon"
+                  variant={isListening ? 'default' : 'ghost'}
+                  className={`absolute right-2 top-2 ${
+                    isListening ? 'bg-warm-500 hover:bg-warm-600 text-white animate-pulse' : ''
+                  }`}
+                  onClick={handleMicClick}
+                  disabled={updateEntry.isPending}
                 >
-                  {isUploading ? (
-                    <>
-                      <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-                      Uploading {uploadProgress > 0 ? `${uploadProgress}%` : '...'}
-                    </>
+                  {isListening ? (
+                    <MicOff className="w-4 h-4" />
                   ) : (
-                    <>
-                      <ImagePlus className="w-4 h-4 mr-2" />
-                      Add Photo
-                    </>
+                    <Mic className="w-4 h-4" />
                   )}
                 </Button>
-                <input
-                  ref={fileInputRef}
-                  type="file"
-                  accept="image/*"
-                  multiple
-                  onChange={handleAddPhotos}
-                  className="hidden"
-                />
-              </div>
+              )}
+              {isListening && (
+                <div className="text-sm text-warm-600 flex items-center gap-2 mt-2">
+                  <span className="w-2 h-2 bg-warm-500 rounded-full animate-pulse" />
+                  Listening...
+                </div>
+              )}
+            </div>
+          ) : (
+            <p className="text-foreground whitespace-pre-wrap leading-relaxed w-full">{entry.text}</p>
+          )}
+
+          {/* Images grid */}
+          {entry.images.length > 0 && (
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 pt-1">
+              {entry.images.map((image, index) => (
+                <div key={index} className="relative group aspect-square rounded-lg overflow-hidden bg-muted">
+                  <img
+                    src={image.getDirectURL()}
+                    alt={`Entry image ${index + 1}`}
+                    className="w-full h-full object-cover cursor-pointer hover:opacity-90 transition-opacity"
+                    onClick={() => handlePhotoClick(index)}
+                  />
+                  <button
+                    type="button"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setPhotoToDelete(image);
+                    }}
+                    disabled={isDeleting}
+                    className="absolute top-2 right-2 p-1.5 bg-destructive text-destructive-foreground rounded-full opacity-0 group-hover:opacity-100 transition-opacity hover:bg-destructive/90 disabled:opacity-50"
+                    aria-label="Delete photo"
+                  >
+                    <Trash2 className="w-3.5 h-3.5" />
+                  </button>
+                </div>
+              ))}
+            </div>
+          )}
+
+          {/* Action toolbar — below the text */}
+          <div className="flex items-center justify-between pt-1 border-t border-border/50">
+            {/* Left: Add Photo */}
+            <div className="flex gap-2">
+              <Button
+                type="button"
+                variant="ghost"
+                size="sm"
+                onClick={() => fileInputRef.current?.click()}
+                disabled={isUploading}
+                className="text-muted-foreground hover:text-foreground"
+              >
+                {isUploading ? (
+                  <>
+                    <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                    Uploading {uploadProgress > 0 ? `${uploadProgress}%` : '...'}
+                  </>
+                ) : (
+                  <>
+                    <ImagePlus className="w-4 h-4 mr-2" />
+                    Add Photo
+                  </>
+                )}
+              </Button>
+              <input
+                ref={fileInputRef}
+                type="file"
+                accept="image/*"
+                multiple
+                onChange={handleAddPhotos}
+                className="hidden"
+              />
             </div>
 
-            <div className="flex gap-2">
+            {/* Right: Edit / Delete (or Save / Cancel when editing) */}
+            <div className="flex gap-1">
               {isEditing ? (
                 <>
                   <Button
@@ -249,14 +251,20 @@ export default function EntryCard({ entry }: EntryCardProps) {
                     variant="ghost"
                     onClick={handleSave}
                     disabled={updateEntry.isPending || !editText.trim()}
+                    className="text-muted-foreground hover:text-foreground"
                   >
-                    <Save className="w-4 h-4" />
+                    {updateEntry.isPending ? (
+                      <Loader2 className="w-4 h-4 animate-spin" />
+                    ) : (
+                      <Save className="w-4 h-4" />
+                    )}
                   </Button>
                   <Button
                     size="icon"
                     variant="ghost"
                     onClick={handleCancel}
                     disabled={updateEntry.isPending}
+                    className="text-muted-foreground hover:text-foreground"
                   >
                     <X className="w-4 h-4" />
                   </Button>
@@ -267,12 +275,17 @@ export default function EntryCard({ entry }: EntryCardProps) {
                     size="icon"
                     variant="ghost"
                     onClick={() => setIsEditing(true)}
+                    className="text-muted-foreground hover:text-foreground"
                   >
                     <Edit2 className="w-4 h-4" />
                   </Button>
                   <AlertDialog>
                     <AlertDialogTrigger asChild>
-                      <Button size="icon" variant="ghost">
+                      <Button
+                        size="icon"
+                        variant="ghost"
+                        className="text-muted-foreground hover:text-destructive"
+                      >
                         <Trash2 className="w-4 h-4" />
                       </Button>
                     </AlertDialogTrigger>

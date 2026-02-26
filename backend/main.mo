@@ -10,6 +10,8 @@ import MixinAuthorization "authorization/MixinAuthorization";
 import AccessControl "authorization/access-control";
 import Text "mo:core/Text";
 
+
+
 actor {
   // Include authorization and storage mixins
   let accessControlState = AccessControl.initState();
@@ -104,6 +106,27 @@ actor {
     id;
   };
 
+  // Create a new journal entry with images
+  public shared ({ caller }) func createEntryWithImages(text : Text, images : [Storage.ExternalBlob]) : async Text {
+    if (not (AccessControl.hasPermission(accessControlState, caller, #user))) {
+      Runtime.trap("Unauthorized: Only users can create entries");
+    };
+
+    let timestamp = Time.now();
+    let id = caller.toText() # "-" # Int.toText(timestamp);
+
+    let entry : JournalEntry = {
+      id;
+      user = caller;
+      text;
+      images;
+      timestamp;
+    };
+
+    entries.add(id, entry);
+    id;
+  };
+
   // Get all entries for the authenticated user
   public query ({ caller }) func getUserEntries() : async [JournalEntry] {
     if (not (AccessControl.hasPermission(accessControlState, caller, #user))) {
@@ -111,6 +134,16 @@ actor {
     };
 
     entries.values().filter(func(entry : JournalEntry) : Bool { entry.user == caller }).toArray();
+  };
+
+  // Get all entries for a specific user
+  public query ({ caller }) func getEntriesForUser(user : Principal) : async [JournalEntry] {
+    // No permission check needed, but only admins can view other users' entries
+    if (caller != user and not (AccessControl.isAdmin(accessControlState, caller))) {
+      Runtime.trap("Unauthorized: Can only view your own entries");
+    };
+
+    entries.values().filter(func(entry : JournalEntry) : Bool { entry.user == user }).toArray();
   };
 
   // Update an existing entry

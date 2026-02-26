@@ -132,9 +132,11 @@ export interface backendInterface {
     addImagesToEntry(id: string, newImages: Array<ExternalBlob>): Promise<void>;
     assignCallerUserRole(user: Principal, role: UserRole): Promise<void>;
     createEntry(text: string): Promise<string>;
+    createEntryWithImages(text: string, images: Array<ExternalBlob>): Promise<string>;
     deleteEntry(id: string): Promise<void>;
     getCallerUserProfile(): Promise<UserProfile | null>;
     getCallerUserRole(): Promise<UserRole>;
+    getEntriesForUser(user: Principal): Promise<Array<JournalEntry>>;
     getThemePreference(): Promise<Theme>;
     getUserEntries(): Promise<Array<JournalEntry>>;
     getUserProfile(user: Principal): Promise<UserProfile | null>;
@@ -287,6 +289,20 @@ export class Backend implements backendInterface {
             return result;
         }
     }
+    async createEntryWithImages(arg0: string, arg1: Array<ExternalBlob>): Promise<string> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.createEntryWithImages(arg0, await to_candid_vec_n8(this._uploadFile, this._downloadFile, arg1));
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.createEntryWithImages(arg0, await to_candid_vec_n8(this._uploadFile, this._downloadFile, arg1));
+            return result;
+        }
+    }
     async deleteEntry(arg0: string): Promise<void> {
         if (this.processError) {
             try {
@@ -327,6 +343,20 @@ export class Backend implements backendInterface {
         } else {
             const result = await this.actor.getCallerUserRole();
             return from_candid_UserRole_n17(this._uploadFile, this._downloadFile, result);
+        }
+    }
+    async getEntriesForUser(arg0: Principal): Promise<Array<JournalEntry>> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.getEntriesForUser(arg0);
+                return from_candid_vec_n19(this._uploadFile, this._downloadFile, result);
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.getEntriesForUser(arg0);
+            return from_candid_vec_n19(this._uploadFile, this._downloadFile, result);
         }
     }
     async getThemePreference(): Promise<Theme> {

@@ -1,53 +1,34 @@
 {
   "kind": "coverage_report",
   "version": "1.0",
-  "generatedAt": "2026-02-22T23:23:04.612Z",
+  "generatedAt": "2026-02-26T13:00:38.277Z",
   "sources": {
     "buildRequest": true,
     "implementationPlan": true
   },
   "requirements": {
-    "total": 3,
-    "implemented": 3,
+    "total": 2,
+    "implemented": 2,
     "items": [
       {
-        "id": "REQ-18",
-        "summary": "Implement a full-screen photo viewer modal that opens when a user clicks on any photo thumbnail in a journal entry card, displaying the clicked photo at full size with a close button to exit the viewer",
+        "id": "REQ-1",
+        "summary": "In EntryCard.tsx, make the journal entry text display full width by removing any width constraints that cause it to share horizontal space with the edit/delete action buttons.",
         "status": "implemented",
         "plannedFiles": [
-          "frontend/src/components/PhotoViewer.tsx",
           "frontend/src/components/EntryCard.tsx"
         ],
         "matchedFiles": [
-          "frontend/src/components/PhotoViewer.tsx",
           "frontend/src/components/EntryCard.tsx"
         ]
       },
       {
-        "id": "REQ-19",
-        "summary": "Add navigation arrows to the full-screen photo viewer that allow users to swipe between multiple photos when the journal entry contains more than one image, with the viewer starting at the clicked photo's position",
+        "id": "REQ-2",
+        "summary": "In EntryCard.tsx, reposition the edit and delete buttons so they no longer sit inline beside the entry text. Place them in a dedicated row below the entry text (or as a compact toolbar at the bottom of the card) so they remain accessible without constraining text width.",
         "status": "implemented",
         "plannedFiles": [
-          "frontend/src/components/PhotoViewer.tsx",
           "frontend/src/components/EntryCard.tsx"
         ],
         "matchedFiles": [
-          "frontend/src/components/PhotoViewer.tsx",
-          "frontend/src/components/EntryCard.tsx"
-        ]
-      },
-      {
-        "id": "REQ-20",
-        "summary": "Fix the voice-to-text transcription bug in EntryForm component where transcribed text appears briefly in the textarea but then disappears, leaving a blank text area, ensuring the transcribed text persists in the textarea after speech recognition completes",
-        "status": "implemented",
-        "plannedFiles": [
-          "frontend/src/components/EntryForm.tsx",
-          "frontend/src/hooks/useSpeechRecognition.ts",
-          "frontend/src/components/EntryCard.tsx"
-        ],
-        "matchedFiles": [
-          "frontend/src/components/EntryForm.tsx",
-          "frontend/src/hooks/useSpeechRecognition.ts",
           "frontend/src/components/EntryCard.tsx"
         ]
       }
@@ -59,9 +40,6 @@
     "frontend-file-summaries.txt",
     "frontend-implementation-plan.json",
     "frontend/src/components/EntryCard.tsx",
-    "frontend/src/components/EntryForm.tsx",
-    "frontend/src/components/PhotoViewer.tsx",
-    "frontend/src/hooks/useSpeechRecognition.ts",
     "project_state.json",
     "scratch/component-selection.json",
     "spec.md",

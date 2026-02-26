@@ -82,6 +82,21 @@ export function useCreateEntry() {
   });
 }
 
+export function useCreateEntryWithImages() {
+  const { actor } = useActor();
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: async ({ text, images }: { text: string; images: ExternalBlob[] }) => {
+      if (!actor) throw new Error('Actor not available');
+      return actor.createEntryWithImages(text, images);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['userEntries'] });
+    },
+  });
+}
+
 export function useUpdateEntry() {
   const { actor } = useActor();
   const queryClient = useQueryClient();

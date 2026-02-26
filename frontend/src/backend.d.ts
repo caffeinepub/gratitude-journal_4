@@ -39,9 +39,11 @@ export interface backendInterface {
     addImagesToEntry(id: string, newImages: Array<ExternalBlob>): Promise<void>;
     assignCallerUserRole(user: Principal, role: UserRole): Promise<void>;
     createEntry(text: string): Promise<string>;
+    createEntryWithImages(text: string, images: Array<ExternalBlob>): Promise<string>;
     deleteEntry(id: string): Promise<void>;
     getCallerUserProfile(): Promise<UserProfile | null>;
     getCallerUserRole(): Promise<UserRole>;
+    getEntriesForUser(user: Principal): Promise<Array<JournalEntry>>;
     getThemePreference(): Promise<Theme>;
     getUserEntries(): Promise<Array<JournalEntry>>;
     getUserProfile(user: Principal): Promise<UserProfile | null>;

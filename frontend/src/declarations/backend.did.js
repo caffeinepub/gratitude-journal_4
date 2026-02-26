@@ -73,9 +73,19 @@ export const idlService = IDL.Service({
   'addImagesToEntry' : IDL.Func([IDL.Text, IDL.Vec(ExternalBlob)], [], []),
   'assignCallerUserRole' : IDL.Func([IDL.Principal, UserRole], [], []),
   'createEntry' : IDL.Func([IDL.Text], [IDL.Text], []),
+  'createEntryWithImages' : IDL.Func(
+      [IDL.Text, IDL.Vec(ExternalBlob)],
+      [IDL.Text],
+      [],
+    ),
   'deleteEntry' : IDL.Func([IDL.Text], [], []),
   'getCallerUserProfile' : IDL.Func([], [IDL.Opt(UserProfile)], ['query']),
   'getCallerUserRole' : IDL.Func([], [UserRole], ['query']),
+  'getEntriesForUser' : IDL.Func(
+      [IDL.Principal],
+      [IDL.Vec(JournalEntry)],
+      ['query'],
+    ),
   'getThemePreference' : IDL.Func([], [Theme], ['query']),
   'getUserEntries' : IDL.Func([], [IDL.Vec(JournalEntry)], ['query']),
   'getUserProfile' : IDL.Func(
@@ -158,9 +168,19 @@ export const idlFactory = ({ IDL }) => {
     'addImagesToEntry' : IDL.Func([IDL.Text, IDL.Vec(ExternalBlob)], [], []),
     'assignCallerUserRole' : IDL.Func([IDL.Principal, UserRole], [], []),
     'createEntry' : IDL.Func([IDL.Text], [IDL.Text], []),
+    'createEntryWithImages' : IDL.Func(
+        [IDL.Text, IDL.Vec(ExternalBlob)],
+        [IDL.Text],
+        [],
+      ),
     'deleteEntry' : IDL.Func([IDL.Text], [], []),
     'getCallerUserProfile' : IDL.Func([], [IDL.Opt(UserProfile)], ['query']),
     'getCallerUserRole' : IDL.Func([], [UserRole], ['query']),
+    'getEntriesForUser' : IDL.Func(
+        [IDL.Principal],
+        [IDL.Vec(JournalEntry)],
+        ['query'],
+      ),
     'getThemePreference' : IDL.Func([], [Theme], ['query']),
     'getUserEntries' : IDL.Func([], [IDL.Vec(JournalEntry)], ['query']),
     'getUserProfile' : IDL.Func(

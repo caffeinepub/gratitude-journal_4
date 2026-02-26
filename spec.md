@@ -1,11 +1,11 @@
 # Specification
 
 ## Summary
-**Goal:** Add full-screen photo viewer with navigation between multiple images and fix voice-to-text transcription bug where text disappears after recording.
+**Goal:** Make the journal entry text in EntryCard full width by moving the edit/delete buttons out of the inline text row and into a dedicated area below the entry text.
 
 **Planned changes:**
-- Implement full-screen photo viewer modal that opens when clicking photo thumbnails
-- Add navigation arrows to swipe between multiple photos in entries with multiple images
-- Fix voice-to-text transcription bug where transcribed text disappears from textarea
+- Remove width constraints on the entry text so it spans the full width of the card
+- Reposition the edit and delete buttons to a dedicated row or footer below the entry text
+- Ensure the updated layout works correctly in both light and dark themes
 
-**User-visible outcome:** Users can click photos to view them full-screen with navigation arrows to browse multiple photos, and voice-to-text transcriptions will persist in the textarea without disappearing.
+**User-visible outcome:** Journal entry text now occupies the full card width, and the edit/delete buttons appear below the text in their own row, remaining clearly visible and tappable.
