@@ -1,0 +1,231 @@
+{
+  "schemaVersion": "1.0.0",
+  "projectStateVersion": 11,
+  "summary": "Gratitude journal app with Internet Identity sign-in protection, single text field entries with voice-to-text transcription via microphone button, and image upload capability for specific journal entries",
+  "architectural_notes": [
+    "Using Internet Identity for authentication",
+    "Voice-to-text integration with microphone button UI component",
+    "Image storage tied to individual journal entries",
+    "Dark mode with system preference detection and user override capability",
+    "User theme preference stored in backend per authenticated user",
+    "Photo editing supports both creating new entries and editing existing entries",
+    "Photo deletion removes files permanently from backend storage"
+  ],
+  "known_issues": [],
+  "isFixRequest": true,
+  "existing_features": [
+    {
+      "id": "feature-implement-internet-identity-authentication-to-protect-the-entire-application-requiring-users-to-sign-in-before-accessing-any-journal-features",
+      "title": "Implement Internet Identity authentication to protect the entire application, requiring users to sign in before accessing any journal features",
+      "reqIds": [
+        "REQ-1"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-build-a-journal-entry-form-with-a-single-text-field-for-gratitude-content-and-a-microphone-button-positioned-next-to-the-text-field-that-enables-voice-to-text-transcription",
+      "title": "Build a journal entry form with a single text field for gratitude content and a microphone button positioned next to the text field that enables voice-to-text transcription",
+      "reqIds": [
+        "REQ-4"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-integrate-web-speech-api-for-voice-to-text-transcription-that-captures-audio-input-and-directly-inserts-the-transcribed-text-into-the-journal-entry-text-field",
+      "title": "Integrate Web Speech API for voice-to-text transcription that captures audio input and directly inserts the transcribed text into the journal entry text field",
+      "reqIds": [
+        "REQ-5"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-image-upload-functionality-that-allows-users-to-attach-one-or-more-images-to-specific-journal-entries-storing-images-in-the-backend-and-displaying-them-with-the-associated-entry",
+      "title": "Implement image upload functionality that allows users to attach one or more images to specific journal entries, storing images in the backend and displaying them with the associated entry",
+      "reqIds": [
+        "REQ-6"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-create-a-journal-entries-list-view-that-displays-all-gratitude-entries-for-the-authenticated-user-showing-entry-text-timestamp-and-associated-images-in-chronological-order-with-most-recent-first",
+      "title": "Create a journal entries list view that displays all gratitude entries for the authenticated user, showing entry text, timestamp, and associated images in chronological order with most recent first",
+      "reqIds": [
+        "REQ-7"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-design-a-cohesive-visual-theme-with-warm-calming-colors-and-typography-that-evokes-mindfulness-and-reflection-avoiding-blue-and-purple-color-schemes",
+      "title": "Design a cohesive visual theme with warm, calming colors and typography that evokes mindfulness and reflection, avoiding blue and purple color schemes",
+      "reqIds": [
+        "REQ-8"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-automatic-dark-mode-detection-based-on-user-s-system-preferences-using-the-prefers-color-scheme-media-query-applying-the-appropriate-theme-light-or-dark-on-initial-load-and-when-system-preferences-change",
+      "title": "Implement automatic dark mode detection based on user's system preferences using the prefers-color-scheme media query, applying the appropriate theme (light or dark) on initial load and when system preferences change",
+      "reqIds": [
+        "REQ-9"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-a-theme-toggle-button-in-the-application-header-that-allows-users-to-manually-override-the-system-preference-and-switch-between-light-and-dark-modes",
+      "title": "Add a theme toggle button in the application header that allows users to manually override the system preference and switch between light and dark modes",
+      "reqIds": [
+        "REQ-10"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-store-user-s-theme-preference-system-light-or-dark-in-the-backend-user-profile-and-persist-it-across-sessions-and-devices-loading-the-saved-preference-when-the-user-signs-in",
+      "title": "Store user's theme preference (system, light, or dark) in the backend user profile and persist it across sessions and devices, loading the saved preference when the user signs in",
+      "reqIds": [
+        "REQ-11"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-an-add-photo-button-to-existing-journal-entry-cards-that-allows-users-to-select-and-upload-additional-images-to-that-specific-entry",
+      "title": "Add an 'Add Photo' button to existing journal entry cards that allows users to select and upload additional images to that specific entry",
+      "reqIds": [
+        "REQ-13"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-delete-icons-on-each-photo-thumbnail-in-journal-entries-that-allow-users-to-remove-individual-photos-with-a-confirmation-prompt",
+      "title": "Add delete icons on each photo thumbnail in journal entries that allow users to remove individual photos with a confirmation prompt",
+      "reqIds": [
+        "REQ-14"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-remove-horizontal-padding-from-the-journal-entry-text-content-within-entry-cards-so-the-text-spans-the-full-width-of-the-card-container-matching-the-width-of-the-timestamp-and-action-buttons-above-it",
+      "title": "Remove horizontal padding from the journal entry text content within entry cards so the text spans the full width of the card container, matching the width of the timestamp and action buttons above it",
+      "reqIds": [
+        "REQ-17"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-a-full-screen-photo-viewer-modal-that-opens-when-a-user-clicks-on-any-photo-thumbnail-in-a-journal-entry-card-displaying-the-clicked-photo-at-full-size-with-a-close-button-to-exit-the-viewer",
+      "title": "Implement a full-screen photo viewer modal that opens when a user clicks on any photo thumbnail in a journal entry card, displaying the clicked photo at full size with a close button to exit the viewer",
+      "reqIds": [
+        "REQ-18"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-navigation-arrows-to-the-full-screen-photo-viewer-that-allow-users-to-swipe-between-multiple-photos-when-the-journal-entry-contains-more-than-one-image-with-the-viewer-starting-at-the-clicked-photo-s-position",
+      "title": "Add navigation arrows to the full-screen photo viewer that allow users to swipe between multiple photos when the journal entry contains more than one image, with the viewer starting at the clicked photo's position",
+      "reqIds": [
+        "REQ-19"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-fix-the-voice-to-text-transcription-bug-in-entryform-component-where-transcribed-text-appears-briefly-in-the-textarea-but-then-disappears-leaving-a-blank-text-area-ensuring-the-transcribed-text-persists-in-the-textarea-after-speech-recognition-completes",
+      "title": "Fix the voice-to-text transcription bug in EntryForm component where transcribed text appears briefly in the textarea but then disappears, leaving a blank text area, ensuring the transcribed text persists in the textarea after speech recognition completes",
+      "reqIds": [
+        "REQ-20"
+      ],
+      "version": 1
+    }
+  ],
+  "new_feature_requests": [
+    {
+      "id": "AR-1",
+      "summary": "Internet Identity authentication for sign-in protection",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-2",
+      "summary": "Single text field for gratitude journal entries",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-3",
+      "summary": "Voice-to-text transcription with microphone button next to text field",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-4",
+      "summary": "Image upload and attachment to specific journal entries",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-6",
+      "summary": "Create a backend data model to store gratitude journal entries with fields for entry text, creation timestamp, user principal, and associated image references",
+      "reqIds": [
+        "REQ-2"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-7",
+      "summary": "Implement backend CRUD operations for journal entries: create new entry, retrieve all entries for authenticated user, update existing entry, and delete entry",
+      "reqIds": [
+        "REQ-3"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-8",
+      "summary": "Implement dark mode with automatic system preference detection, manual toggle override, per-user preference storage, and warm calming dark color palette",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-12",
+      "summary": "Create a warm, calming dark mode color palette that maintains the mindful aesthetic by using darker versions of the existing terracotta, sage, and peach colors defined in the current OKLCH color system",
+      "reqIds": [
+        "REQ-12"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-13",
+      "summary": "Add photo editing capabilities to journal entries: add photos to existing entries and new entries, remove individual photos with confirmation, and permanently delete photos from backend storage",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-16",
+      "summary": "Implement backend method to permanently delete individual photos from storage when removed from a journal entry",
+      "reqIds": [
+        "REQ-15"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-17",
+      "summary": "Ensure the EntryForm component supports adding and removing multiple images before submission when creating a new journal entry",
+      "reqIds": [
+        "REQ-16"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-18",
+      "summary": "Full-screen photo viewer with navigation arrows to swipe between multiple images in entries with close button",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-19",
+      "summary": "Fix voice-to-text bug where transcribed text appears briefly then disappears from text area when creating or editing entries",
+      "reqIds": [],
+      "status": "pending"
+    }
+  ],
+  "projectName": "Gratitude Journal",
+  "clarification_mode": "instant",
+  "clarification_rounds": 0
+}

@@ -1,0 +1,81 @@
+{
+  "kind": "implementation_plan",
+  "version": "1.0",
+  "title": "Add full-screen photo viewer with navigation and fix voice-to-text transcription bug",
+  "requirements": [
+    {
+      "id": "REQ-18",
+      "summary": "Implement a full-screen photo viewer modal that opens when a user clicks on any photo thumbnail in a journal entry card",
+      "acceptanceCriteria": [
+        "Clicking any photo thumbnail in an entry card opens a full-screen modal overlay",
+        "The clicked photo displays at full size while maintaining aspect ratio",
+        "A close button is visible and functional to exit the full-screen view",
+        "Clicking outside the photo or pressing Escape key also closes the viewer"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/PhotoViewer.tsx",
+          "operation": "create",
+          "description": "Create a full-screen modal photo viewer component that displays a single photo at full size with a close button. Include overlay background, Escape key handler, click-outside-to-close functionality, and maintain the warm calming theme consistent with the existing app design. The component accepts a photo ExternalBlob and onClose callback as props."
+        },
+        {
+          "path": "frontend/src/components/EntryCard.tsx",
+          "operation": "modify",
+          "description": "Add click handlers to image thumbnails that open the PhotoViewer modal. Import and integrate the PhotoViewer component with state management to track which photo is being viewed and whether the viewer is open. Pass the clicked photo and close handler to PhotoViewer."
+        }
+      ]
+    },
+    {
+      "id": "REQ-19",
+      "summary": "Add navigation arrows to the full-screen photo viewer for swiping between multiple photos when an entry contains more than one image",
+      "acceptanceCriteria": [
+        "When an entry has multiple photos, left and right navigation arrows appear in the full-screen viewer",
+        "Clicking the right arrow advances to the next photo in the sequence",
+        "Clicking the left arrow goes back to the previous photo",
+        "The viewer opens showing the specific photo that was clicked",
+        "Navigation wraps around (last photo's next is first photo, first photo's previous is last photo)",
+        "Keyboard arrow keys also navigate between photos"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/PhotoViewer.tsx",
+          "operation": "modify",
+          "description": "Enhance PhotoViewer to accept an array of photos and the current photo index as props. Add left and right navigation arrow buttons that appear when multiple photos exist. Implement photo navigation logic with wraparound behavior. Add keyboard event handlers for ArrowLeft and ArrowRight keys to navigate between photos. Update the display to show the photo at the current index."
+        },
+        {
+          "path": "frontend/src/components/EntryCard.tsx",
+          "operation": "modify",
+          "description": "Update the PhotoViewer integration to pass the full images array and the index of the clicked photo. Track the current photo index in state and pass it to PhotoViewer along with the entire images array from the journal entry."
+        }
+      ]
+    },
+    {
+      "id": "REQ-20",
+      "summary": "Fix the voice-to-text transcription bug where transcribed text appears briefly then disappears, ensuring text persists in the textarea",
+      "acceptanceCriteria": [
+        "When using voice-to-text transcription, the transcribed text remains visible in the textarea after speech recognition completes",
+        "The text does not disappear or reset to empty after appearing",
+        "This fix applies when creating new journal entries",
+        "This fix also applies when editing existing journal entries if the bug exists there",
+        "The transcribed text can be edited manually after transcription completes"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/EntryForm.tsx",
+          "operation": "modify",
+          "description": "Debug and fix the voice-to-text transcription state management issue causing text to disappear. Ensure the transcribed text from useSpeechRecognition properly updates and persists in the textarea state without being cleared by re-renders or other state updates. Verify that the transcript value is correctly merged with existing textarea content and remains stable after speech recognition completes."
+        },
+        {
+          "path": "frontend/src/hooks/useSpeechRecognition.ts",
+          "operation": "modify",
+          "description": "Review and fix the speech recognition hook implementation to ensure the final transcript is properly returned and doesn't reset unexpectedly. Verify that the transcript state persists after the speech recognition stops and that interim results transition correctly to final results without clearing the accumulated text."
+        },
+        {
+          "path": "frontend/src/components/EntryCard.tsx",
+          "operation": "modify",
+          "description": "If inline editing uses voice-to-text, apply the same fix to ensure transcribed text persists in the editing textarea. Review the editing state management to prevent transcript loss during re-renders or state updates."
+        }
+      ]
+    }
+  ]
+}

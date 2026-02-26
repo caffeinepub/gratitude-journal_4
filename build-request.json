@@ -1,0 +1,82 @@
+{
+  "kind": "build_request",
+  "title": "Add full-screen photo viewer with navigation and fix voice-to-text transcription bug",
+  "priority": "normal",
+  "requirements": [
+    {
+      "id": "REQ-18",
+      "text": "Implement a full-screen photo viewer modal that opens when a user clicks on any photo thumbnail in a journal entry card, displaying the clicked photo at full size with a close button to exit the viewer",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-user-fullscreen-request"
+        ],
+        "quotes": [
+          "When i click on a photo for an entry can it be full screen?"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Clicking any photo thumbnail in an entry card opens a full-screen modal overlay",
+        "The clicked photo displays at full size while maintaining aspect ratio",
+        "A close button is visible and functional to exit the full-screen view",
+        "Clicking outside the photo or pressing Escape key also closes the viewer"
+      ]
+    },
+    {
+      "id": "REQ-19",
+      "text": "Add navigation arrows to the full-screen photo viewer that allow users to swipe between multiple photos when the journal entry contains more than one image, with the viewer starting at the clicked photo's position",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-user-navigation-request"
+        ],
+        "quotes": [
+          "Navigation if entry has multiple images"
+        ]
+      },
+      "acceptanceCriteria": [
+        "When an entry has multiple photos, left and right navigation arrows appear in the full-screen viewer",
+        "Clicking the right arrow advances to the next photo in the sequence",
+        "Clicking the left arrow goes back to the previous photo",
+        "The viewer opens showing the specific photo that was clicked",
+        "Navigation wraps around (last photo's next is first photo, first photo's previous is last photo)",
+        "Keyboard arrow keys also navigate between photos"
+      ]
+    },
+    {
+      "id": "REQ-20",
+      "text": "Fix the voice-to-text transcription bug in EntryForm component where transcribed text appears briefly in the textarea but then disappears, leaving a blank text area, ensuring the transcribed text persists in the textarea after speech recognition completes",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-user-voice-bug"
+        ],
+        "quotes": [
+          "when I do voice to text.. i see the text show up temporarily but then it goes away and I'm left with a blank text area"
+        ]
+      },
+      "acceptanceCriteria": [
+        "When using voice-to-text transcription, the transcribed text remains visible in the textarea after speech recognition completes",
+        "The text does not disappear or reset to empty after appearing",
+        "This fix applies when creating new journal entries",
+        "This fix also applies when editing existing journal entries if the bug exists there",
+        "The transcribed text can be edited manually after transcription completes"
+      ]
+    }
+  ],
+  "constraints": [
+    "Do not modify the backend schema or data models",
+    "Maintain the existing warm, calming visual theme in the photo viewer modal",
+    "The photo viewer must work with the existing image storage and retrieval system"
+  ],
+  "nonGoals": [
+    "Implementing zoom functionality for photos in the viewer",
+    "Adding photo editing capabilities within the full-screen viewer",
+    "Implementing swipe gestures on mobile devices (arrow buttons are sufficient)",
+    "Adding photo metadata display in the viewer"
+  ],
+  "imageRequirements": {
+    "required": [],
+    "edits": []
+  }
+}

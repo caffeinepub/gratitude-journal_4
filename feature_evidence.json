@@ -1,0 +1,69 @@
+{
+  "kind": "feature_evidence_report",
+  "features": [
+    {
+      "featureId": "feature-implement-a-full-screen-photo-viewer-modal-that-opens-when-a-user-clicks-on-any-photo-thumbnail-in-a-journal-entry-card-displaying-the-clicked-photo-at-full-size-with-a-close-button-to-exit-the-viewer",
+      "featureTitle": "Implement a full-screen photo viewer modal that opens when a user clicks on any photo thumbnail in a journal entry card, displaying the clicked photo at full size with a close button to exit the viewer",
+      "files": [
+        "frontend/src/components/EntryCard.tsx",
+        "frontend/src/components/PhotoViewer.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "blob-storage@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-18"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-add-navigation-arrows-to-the-full-screen-photo-viewer-that-allow-users-to-swipe-between-multiple-photos-when-the-journal-entry-contains-more-than-one-image-with-the-viewer-starting-at-the-clicked-photo-s-position",
+      "featureTitle": "Add navigation arrows to the full-screen photo viewer that allow users to swipe between multiple photos when the journal entry contains more than one image, with the viewer starting at the clicked photo's position",
+      "files": [
+        "frontend/src/components/EntryCard.tsx",
+        "frontend/src/components/PhotoViewer.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "blob-storage@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-19"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-fix-the-voice-to-text-transcription-bug-in-entryform-component-where-transcribed-text-appears-briefly-in-the-textarea-but-then-disappears-leaving-a-blank-text-area-ensuring-the-transcribed-text-persists-in-the-textarea-after-speech-recognition-completes",
+      "featureTitle": "Fix the voice-to-text transcription bug in EntryForm component where transcribed text appears briefly in the textarea but then disappears, leaving a blank text area, ensuring the transcribed text persists in the textarea after speech recognition completes",
+      "files": [
+        "frontend/src/components/EntryCard.tsx",
+        "frontend/src/components/EntryForm.tsx",
+        "frontend/src/hooks/useSpeechRecognition.ts"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "blob-storage@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-20"
+      ],
+      "confidence": "high"
+    }
+  ]
+}
